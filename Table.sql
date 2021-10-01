@@ -1,0 +1,32 @@
+﻿CREATE TABLE CarType 
+(
+	TypeId INT IDENTITY PRIMARY KEY,
+	TypeName NVARCHAR(40) NOT NULL,
+	SeatCapasity INT NOT NULL	
+)
+GO
+CREATE TABLE Car
+(
+	CarId INT IDENTITY PRIMARY KEY,
+	CarModel NVARCHAR(40) NOT NULL,
+	RentedRate DECIMAL NOT NULL,
+	RentedDate Date NOT NULL,
+	ReturnDate Date NULL,
+	TypeId INT REFERENCES CarType(TypeId)
+)
+GO
+CREATE TABLE Customer
+(
+	CustomerId INT IDENTITY PRIMARY KEY,
+	CustomerName NVARCHAR(20) NOT NULL, 
+	Phone NVARCHAR(11) NOT NULL,
+	[Address] NVARCHAR (50) NOT NULL
+)
+Go
+CREATE TABLE CarRent 
+(
+	CarId INT REFERENCES Car(CarId),
+	CustomerId INT REFERENCES Customer(CustomerId)
+	PRIMARY KEY(CarId, CustomerId)
+)
+GO
